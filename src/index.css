@@ -1,13 +1,311 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --blue: rgba(0, 43, 128, 0.65);
+  --green: #b1ff7b;
+  --yellow: #fffbd8;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  background-color: var(--green);
+  background-image: -webkit-linear-gradient(right, var(--yellow), var(--green));
+  background-image: -moz-linear-gradient(right, var(--yellow), var(--green));
+  background-image: -o-linear-gradient(right, var(--yellow), var(--green));
+  background-image: -ms-linear-gradient(right, var(--yellow), var(--green));
+  background-image: linear-gradient(right, var(--yellow), var(--green));
+  font-weight: 200;
+  font-family: system-ui, sans-serif;
+  color: var(--yellow);
+  align-content: center;
+}
+
+h1 {
+  font-size: 40x;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 24px;
+  display: inline;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--blue);
+}
+
+input {
+  background-color: transparent;
+  outline: none;
+  font-size: 20px;
+  color: var(--green);
+  border: 0px solid var(--green);
+  animation: show-input-field 0.8s 1.7s forwards;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hidden {
+  display: none;
+}
+
+.button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  width: 180px;
+  height: 50px;
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+  color: transparent;
+  border: 0px solid var(--blue);
+  border-radius: 4px;
+  transition: transform 0.3s ease-out;
+}
+.button:hover {
+  transform: scale(1.1, 1.1) translate(-45%, -45%);
+  transform-origin: center;
+  transition: transform 0.3s ease-out;
+}
+.button.open {
+  cursor: pointer;
+  animation: unfold-button 0.8s 0.6s forwards;
+}
+.button.closed {
+  cursor: default;
+  animation: foldup-button 0.8s forwards;
+}
+
+/* DISPLAY USER INPUT */
+
+.user-input {
+  position: relative;
+  top: -60px;
+}
+
+/* MODAL */
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0px;
+  height: 0px;
+  background-color: var(--blue);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  border: none;
+}
+.modal.open {
+  will-change: width, height;
+  -webkit-animation: open-modal 0.5s ease 0.9s forwards;
+  animation: open-modal 0.5s ease 0.9s forwards;
+}
+.modal.closed {
+  will-change: width, height;
+  -webkit-animation: close-modal 0.4s;
+  animation: close-modal 0.4s;
+}
+
+/* MODAL USER INPUT */
+
+.button.submit {
+  height: 50px;
+  width: 180px;
+  top: 60%;
+  animation: show-submit-button 0.3s forwards;
+}
+
+.input {
+  position: absolute;
+  top: 35%;
+  left: 85px;
+  border: none;
+  color: transparent;
+  animation: show-input-message 0.3s 1.5s forwards;
+}
+
+/* MODAL EXIT BUTTON */
+
+.exit-button {
+  position: absolute;
+  top: 5px;
+  right: 23px;
+  cursor: pointer;
+}
+.exit-button:before,
+.exit-button:after {
+  content: "";
+  position: absolute;
+  height: 28px;
+  width: 7px;
+  border-radius: 3px;
+  animation: show-exit-button 0.1s 1.5s forwards;
+  transition: transform 0.3s;
+}
+.exit-button:before {
+  transform: rotate(45deg);
+}
+.exit-button:after {
+  transform: rotate(-45deg);
+}
+.exit-button:hover:before {
+  transform: scale(1.15) rotate(45deg);
+  transition: transform 0.3s;
+}
+.exit-button:hover:after {
+  transform: scale(1.15) rotate(-45deg);
+  transition: transform 0.3s;
+}
+
+@keyframes show-exit-button {
+  100% {
+    background-color: #fc9282;
+  }
+}
+@keyframes show-input-message {
+  100% {
+    color: var(--green);
+  }
+}
+@keyframes show-input-field {
+  from {
+    border-bottom: 2px solid var(--green);
+    width: 0px;
+  }
+  to {
+    border-bottom: 2px solid var(--green);
+    width: 500px;
+  }
+}
+@keyframes show-submit-button {
+  100% {
+    background-color: var(--yellow);
+    font-size: 20px;
+    font-weight: 200;
+    font-family: system-ui, sans-serif;
+    color: var(--blue);
+    top: 80%;
+  }
+}
+@keyframes open-modal {
+  0% {
+    width: 0px;
+    height: 0px;
+  }
+  100% {
+    width: 800px;
+    height: 400px;
+  }
+}
+@keyframes close-modal {
+  from {
+    width: 500px;
+    height: 300px;
+  }
+  to {
+    width: 0px;
+    height: 0px;
+  }
+}
+@keyframes foldup-button {
+  0% {
+    width: 180px;
+    height: 50px;
+    font-size: 20px;
+    border: 2px solid var(--blue);
+    border-radius: 4px;
+  }
+  25% {
+    width: 180px;
+    height: 50px;
+    font-size: 0px;
+    border: 2px solid var(--blue);
+    border-radius: 4px;
+  }
+  40% {
+    width: 180px;
+    height: 50px;
+    font-size: 0px;
+    border: 2px solid var(--blue);
+    border-radius: 4px;
+  }
+  65% {
+    width: 180px;
+    height: 0px;
+    font-size: 0px;
+    border: 1px solid var(--blue);
+    border-radius: 4px;
+  }
+  70% {
+    width: 180px;
+    height: 0px;
+    font-size: 0px;
+    border: 1px solid var(--blue);
+    border-radius: 4px;
+  }
+  99% {
+    width: 0px;
+    height: 0px;
+    font-size: 0px;
+    border: 1px solid var(--blue);
+    border-radius: 4px;
+  }
+  100% {
+    width: 0px;
+    height: 0px;
+    font-size: 0px;
+    border: none;
+  }
+}
+@keyframes unfold-button {
+  0% {
+    width: 0px;
+    height: 0px;
+    border: none;
+    color: transparent;
+  }
+  1% {
+    width: 0px;
+    height: 0px;
+    border: 1px solid var(--blue);
+    border-radius: 4px;
+  }
+  30% {
+    width: 180px;
+    height: 0px;
+    border: 1px solid var(--blue);
+    border-radius: 4px;
+  }
+  35% {
+    width: 180px;
+    height: 0px;
+    border: 1px solid var(--blue);
+    border-radius: 4px;
+  }
+  60% {
+    width: 180px;
+    height: 50px;
+    border: 2px solid var(--blue);
+    border-radius: 4px;
+  }
+  75% {
+    width: 180px;
+    height: 50px;
+    border: 2px solid var(--blue);
+    border-radius: 4px;
+    color: transparent;
+  }
+  100% {
+    width: 180px;
+    height: 50px;
+    border: 2px solid var(--blue);
+    border-radius: 4px;
+    color: var(--blue);
+  }
 }

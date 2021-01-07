@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Modal from "./components/modal";
+import { defaultMessage } from "./constants";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      modalOpen: false,
+      isPageLoad: true,
+      userInput: "",
+    };
+
+    this.toggleModal = this.toggleModal.bind(this);
+  }
+
+  toggleModal(optionalInput) {
+    this.setState({ modalOpen: !this.state.modalOpen });
+    this.setState({ isPageLoad: false });
+    this.setState({ userInput: optionalInput });
+  }
+
+  render() {
+    return (
+      <div>
+        <div className="container">
+          <button
+            className={`button ${this.state.modalOpen ? "closed" : "open"}`}
+            disabled={this.state.modalOpen}
+            onClick={() => this.toggleModal("")}
+          >
+            Give us your feedback!
+          </button>
+          {this.state.userInput ? (
+            <div>
+              <h2 class="user-input">
+                You typed &nbsp;{this.state.userInput}
+                <p>{defaultMessage}</p>
+              </h2>
+            </div>
+          ) : null}
+        </div>
+        <Modal
+          toggleModal={this.toggleModal}
+          submitUserInput={this.submitUserInput}
+          modalOpen={this.state.modalOpen}
+          isPageLoad={this.state.isPageLoad}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
