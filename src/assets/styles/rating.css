@@ -5,7 +5,7 @@
 }
 
 li {
-  margin: 25px;
+  margin: 10px 25px;
   display: flex !important;
   justify-content: space-around;
 }
@@ -13,13 +13,18 @@ li {
 .rate-count .number {
   width: 32px;
   height: 32px;
-  border: 0.5px solid #000000;
+  border: var(--border1px);
   opacity: 1;
   margin: auto;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.selected {
+  color: var(--yellow);
+  font-weight: bold;
 }
 
 .rate-count span {
@@ -31,9 +36,9 @@ li {
 .rate-count p.name:not(.last) {
   margin-top: 11px;
   text-align: center;
-  font-size: 11px;
+  font-size: 14px;
   letter-spacing: 0;
-  color: #fffbd8;
+  color: var(--yellow);
   opacity: 1;
   margin-bottom: 0px;
 }
@@ -43,10 +48,12 @@ li {
   margin-top: -5px;
   margin-bottom: -5px;
 }
+
 .rate-emote .emote img {
   width: 48px;
   height: 48px;
 }
+
 .rate-emote .emote img .last {
   width: 61px;
   height: 61px;
@@ -55,9 +62,9 @@ li {
 
 .rate-emote p .name {
   text-align: center;
-  font-size: 13px;
+  font-size: 16px;
   letter-spacing: 0;
-  color: rgba(0, 43, 128, 0.65);
+  color: var(--blue);
   opacity: 1;
   margin-top: 4px;
   margin-bottom: 0px;

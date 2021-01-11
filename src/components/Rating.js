@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import "../assets/styles/rating.css";
 import { Emotes } from "../constants";
 
-export default function Rating({ setRating }) {
+export default function Rating({ setExperience }) {
   const [rate, setRate] = useState("");
 
   const select = (value) => {
     setRate(value);
-    setRating(value);
+    setExperience(value);
   };
 
   return (

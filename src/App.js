@@ -1,55 +1,47 @@
-import React, { Component } from "react";
-import Modal from "./components/modal";
+import React, { useState } from "react";
+import Modal from "./components/Modal";
 import { defaultMessage } from "./constants";
+import "./App.css";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+export default function App({ submitUserInput, match }) {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [isPageLoad, setIsPageLoad] = useState(true);
+  const [userInput, setUserInput] = useState("");
+  const [experience, setExperience] = useState(undefined);
 
-    this.state = {
-      modalOpen: false,
-      isPageLoad: true,
-      userInput: "",
-    };
+  const toggleModal = (e, optionalInput) => {
+    setModalOpen(e.target);
+    setIsPageLoad(false);
+    setUserInput(optionalInput);
+  };
 
-    this.toggleModal = this.toggleModal.bind(this);
-  }
-
-  toggleModal(optionalInput) {
-    this.setState({ modalOpen: !this.state.modalOpen });
-    this.setState({ isPageLoad: false });
-    this.setState({ userInput: optionalInput });
-  }
-
-  render() {
-    return (
-      <div>
-        <div className="container">
-          <button
-            className={`button ${this.state.modalOpen ? "closed" : "open"}`}
-            disabled={this.state.modalOpen}
-            onClick={() => this.toggleModal("")}
-          >
-            Give us your feedback!
-          </button>
-          {this.state.userInput ? (
-            <div>
-              <h2 class="user-input">
-                You typed &nbsp;{this.state.userInput}
-                <p>{defaultMessage}</p>
-              </h2>
-            </div>
-          ) : null}
-        </div>
-        <Modal
-          toggleModal={this.toggleModal}
-          submitUserInput={this.submitUserInput}
-          modalOpen={this.state.modalOpen}
-          isPageLoad={this.state.isPageLoad}
-        />
+  return (
+    <div>
+      <div className="container">
+        <button
+          className={`button ${modalOpen ? "closed" : "open"}`}
+          disabled={(modalOpen, submitUserInput)}
+          onClick={toggleModal}
+        >
+          Give us your feedback!
+        </button>
+        {userInput ? (
+          <div>
+            <h2 className="user-input">
+              Your review is "<strong>{userInput}</strong>"
+              <p>{defaultMessage}</p>
+            </h2>
+          </div>
+        ) : null}
       </div>
-    );
-  }
+      <Modal
+        toggleModal={toggleModal}
+        submitUserInput={submitUserInput}
+        modalOpen={modalOpen}
+        isPageLoad={isPageLoad}
+        experience={experience}
+        setExperience={setExperience}
+      />
+    </div>
+  );
 }
-
-export default App;
