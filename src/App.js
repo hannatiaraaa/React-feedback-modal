@@ -1,3 +1,6 @@
+/*
+    Copyright (C) 2021 Hanna Tiara Andarlia
+*/
 import React, { useState } from "react";
 import Modal from "./components/Modal";
 import { defaultMessage } from "./constants";

@@ -1,3 +1,6 @@
+/*
+    Copyright (C) 2021 Hanna Tiara Andarlia
+*/
 import React, { useState, useEffect } from "react";
 import Rating from "./Rating";
 

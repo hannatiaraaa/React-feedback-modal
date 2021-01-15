@@ -1,3 +1,6 @@
+/*
+    Copyright (C) 2021 Hanna Tiara Andarlia
+*/
 import React, { useState } from "react";
 import "../assets/styles/rating.css";
 import { Emotes } from "../constants";
